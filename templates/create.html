@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Create Account</title>
+  <link rel="stylesheet" href="/static/project.css" />
+  <script src="https://kit.fontawesome.com/413402dab6.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="log">
+      <form method="POST" action="{{ url_for('create') }}" onsubmit="return validatePasswords()">
+  <center>
+    <h1>Create Account</h1>
+    <h4>Register to manage your shifts and leave</h4>
+  </center>
+
+<div class="ibox">
+        <select id="role" name="role" required>
+          <option value="" disabled selected>Select Role</option>
+          <option value="employee">Employee</option>
+          <option value="supervisor">Supervisor</option>
+          <option value="hr">HR</option>
+        </select>
+        <i class="fa-solid fa-caret-down"></i>
+      </div>
+
+      <div class="ibox">
+        <input type="text" name="name" placeholder="NAME" required>
+        <i class="fa-solid fa-user"></i>
+      </div>
+
+      <div class="ibox">
+        <input type="text" name="empid" placeholder="6 digit id" required>
+        <i class="fa-solid fa-id-card"></i>
+      </div>
+
+      <div class="ibox">
+        <input type="email" name="email" placeholder="you@example.com" required>
+        <i class="fa-solid fa-envelope"></i>
+      </div>
+
+      <div class="ibox">
+        <input type="number" name="number" placeholder="+91 " required>
+        <i class="fa-solid fa-phone"></i>
+      </div>
+
+      <div class="ibox">
+        <input id="password" name="password" type="password" placeholder="Create password" required minlength="6">
+        <i class="fa-solid fa-lock"></i>
+      </div>
+
+      <div class="ibox">
+        <input id="confirm-password" name="confirmPassword" type="password" placeholder="Confirm password" required minlength="6">
+        <i class="fa-solid fa-lock"></i>
+      </div>
+      <div class="buttons-row">
+        <button type="submit" class="btn">Create Account</button>
+      </div>
+
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <p class="{{ category }}">{{ message }}</p>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+      <div class="reg-link">
+        <p>Already have an account? <a href="{{ url_for('login') }}">Login</a></p>
+      </div>
+    </form>
+
+  </div>
+</body>
+</html>
+
+
+
+
+
+

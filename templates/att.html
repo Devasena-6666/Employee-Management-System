@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Employee Attendance Calendar</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background:url('/static/images/grey1.jpg');
+  }
+  .calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+  }
+  .weekday {
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    background-color: #0b0d0f;
+    color: #fff;
+  }
+  .day {
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    box-shadow: 0 0 5px rgba(226, 69, 69, 0.1);
+    color: #155724;
+  }
+  .weekday-present {
+    background-color: #d4edda; /* green for weekdays */
+  }
+  .weekend-present {
+    background-color: #e0c981; /* yellow for weekends */
+    color: #856404;
+  }
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .month-year {
+    font-size: 1.6em;
+    font-weight: bold;
+  }
+  .nav-btn {
+    cursor: pointer;
+    padding: 5px 10px;
+    border: none;
+    background: #101822;
+    color: white;
+    border-radius: 5px;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <button class="nav-btn" onclick="prevMonth()">Prev</button>
+  <div class="month-year" id="monthYear"></div>
+  <button class="nav-btn" onclick="nextMonth()">Next</button>
+</div>
+
+<div class="calendar" id="calendar"></div>
+
+<script>
+  const calendar = document.getElementById('calendar');
+  const monthYear = document.getElementById('monthYear');
+  let currentDate = new Date();
+
+  function renderCalendar(date) {
+    calendar.innerHTML = '';
+
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    monthYear.innerText = date.toLocaleString('default', { month: 'long', year: 'numeric' });
+
+    // Weekday headers
+    const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    weekdays.forEach(day => {
+      const dayHeader = document.createElement('div');
+      dayHeader.classList.add('weekday');
+      dayHeader.textContent = day;
+      calendar.appendChild(dayHeader);
+    });
+
+    const firstDay = new Date(year, month, 1).getDay(); // day of week of 1st day
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    // Empty slots before first day
+    for (let i = 0; i < firstDay; i++) {
+      const emptyDiv = document.createElement('div');
+      calendar.appendChild(emptyDiv);
+    }
+
+    // Dates (all present by default)
+    for (let day = 1; day <= daysInMonth; day++) {
+      const dayDiv = document.createElement('div');
+
+      const weekdayIndex = new Date(year, month, day).getDay();
+      if (weekdayIndex === 0 || weekdayIndex === 6) {
+        dayDiv.classList.add('day', 'weekend-present'); // Sunday or Saturday
+      } else {
+        dayDiv.classList.add('day', 'weekday-present'); // Weekday
+      }
+
+      dayDiv.innerHTML = `<strong>${day}</strong> <br> P`;
+      calendar.appendChild(dayDiv);
+    }
+  }
+
+  function prevMonth() {
+    currentDate.setMonth(currentDate.getMonth() - 1);
+    renderCalendar(currentDate);
+  }
+
+  function nextMonth() {
+    currentDate.setMonth(currentDate.getMonth() + 1);
+    renderCalendar(currentDate);
+  }
+
+  renderCalendar(currentDate);
+</script>
+
+</body>
+</html>
