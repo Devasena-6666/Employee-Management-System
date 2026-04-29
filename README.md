@@ -1,10 +1,12 @@
 # 👨‍💼 Employee Management System (EMS)
-
+![GitHub repo size](https://img.shields.io/github/repo-size/Devasena-6666/employee-management-system)
+![GitHub stars](https://img.shields.io/github/stars/Devasena-6666/employee-management-system?style=social)
+![GitHub forks](https://img.shields.io/github/forks/Devasena-6666/employee-management-system?style=social)
 ![Python](https://img.shields.io/badge/Python-3.8+-blue)
 ![Flask](https://img.shields.io/badge/Flask-Web%20Framework-green)
 ![SQLite](https://img.shields.io/badge/Database-SQLite-lightgrey)
 ![Status](https://img.shields.io/badge/Status-Active-success)
-
+![License](https://img.shields.io/badge/License-MIT-yellow)
 ---
 
 ## 📌 Overview
